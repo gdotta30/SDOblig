@@ -9,6 +9,8 @@ import obligatorio.Noticia;
 import com.google.gson.JsonObject;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -252,8 +254,12 @@ public class Noticias extends javax.swing.JFrame {
     }//GEN-LAST:event_btnObtenerNoticiasActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        //Guarda un txt con el contenido de la textarea Noticias
-        try (PrintWriter out = new PrintWriter("Noticias.txt")) 
+        //Guarda un txt con el contenido de la textarea Noticias       
+        LocalDateTime ahora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss");
+        String strAhora = ahora.format(formatter);
+        
+        try (PrintWriter out = new PrintWriter("Noticias_" + strAhora + ".txt")) 
         {
             out.println(txtObtenerNoticias.getText());
         } 
