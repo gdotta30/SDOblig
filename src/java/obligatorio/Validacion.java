@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package obligatorio;
 
 /**
  *
  * @author jose_
  */
-public class Noticia {
-    
+public class Validacion {
     
     private String usuario;
-    private String titulo;
-    private String validacion;
+    private boolean validacion;
         
-
+    public Validacion(String usr, boolean val){
+        this.usuario = usr;
+        this.validacion = val;
+    }
+    
     /**
      * @return the usuario
      */
@@ -32,33 +34,17 @@ public class Noticia {
     }
 
     /**
-     * @return the titulo
-     */
-    public String getTitulo() {
-        return titulo;
-    }
-
-    /**
-     * @param titulo the titulo to set
-     */
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    /**
      * @return the validacion
      */
-    public String getValidacion() {
+    public boolean isValidacion() {
         return validacion;
     }
 
     /**
      * @param validacion the validacion to set
      */
-    public void setValidacion(String validacion) {
+    public void setValidacion(boolean validacion) {
         this.validacion = validacion;
     }
-    
-    
     
 }

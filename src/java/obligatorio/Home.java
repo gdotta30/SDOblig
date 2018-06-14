@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package obligatorio;
 
 /**
  *
@@ -58,6 +58,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         btnRegister.setText("Registrarme");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("¿Primera vez?");
 
@@ -120,6 +125,12 @@ public class Home extends javax.swing.JFrame {
         Noticias noticias = new Noticias(txtUser.getText());
         noticias.setVisible(true);
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // Habría que insertar el Usuario en la BDD
+        Noticias noticias = new Noticias(txtUser.getText());
+        noticias.setVisible(true);
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments

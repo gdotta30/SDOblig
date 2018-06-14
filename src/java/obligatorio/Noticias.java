@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package obligatorio;
 
-import interfaces.Noticia;
+import obligatorio.Noticia;
 import com.google.gson.JsonObject;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import noobchain.StringUtil;
 
 /**
@@ -47,6 +52,12 @@ public class Noticias extends javax.swing.JFrame {
         txtAgregar = new javax.swing.JTextArea();
         btnAgregar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        btnObtenerNoticias = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtObtenerNoticias = new javax.swing.JTextArea();
+        btnReenviar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,20 +95,19 @@ public class Noticias extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(114, 114, 114)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTitulo)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbValidacion, 0, 167, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTitulo)
+                    .addComponent(cmbValidacion, 0, 281, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 179, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,21 +123,72 @@ public class Noticias extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane2.addTab("Agregar", jPanel1);
 
+        btnObtenerNoticias.setText("Obtener Noticias");
+        btnObtenerNoticias.setToolTipText("");
+        btnObtenerNoticias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObtenerNoticiasActionPerformed(evt);
+            }
+        });
+
+        txtObtenerNoticias.setColumns(20);
+        txtObtenerNoticias.setRows(5);
+        jScrollPane2.setViewportView(txtObtenerNoticias);
+
+        btnReenviar.setText("Reenviar");
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Ingresar validaciones");
+        jLabel4.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnObtenerNoticias)
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnReenviar, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 308, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnObtenerNoticias))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReenviar)
+                    .addComponent(btnGuardar))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Validar", null, jPanel2, "");
@@ -162,18 +223,44 @@ public class Noticias extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTituloActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
         String tituloNoticia = txtTitulo.getText();
-        String validacion = cmbValidacion.getSelectedItem().toString();
-        Noticia noticia = new Noticia();
-        noticia.setTitulo(tituloNoticia);
-        noticia.setValidacion(validacion);
-        noticia.setUsuario(usuarioActual);
+        String txtValidacion = cmbValidacion.getSelectedItem().toString();
+        boolean validacion = txtValidacion == "Verdadera" ? true : false;
+        Validacion primerVal = new Validacion(usuarioActual, validacion);
         
-        String retorno = StringUtil.getJson(noticia);
+        Noticia noticia = new Noticia(usuarioActual, tituloNoticia, new ArrayList<Validacion>(){{
+            add(primerVal);
+        }}); //Creo noticia con usuario y titulo y le agrego la primer validacion       
         
-        txtAgregar.setText(retorno);
+        String retorno = StringUtil.getJson(noticia); //Creo JSON String de la noticia
+        txtAgregar.append(retorno);
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnObtenerNoticiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerNoticiasActionPerformed
+        Noticia noticia1 = new Noticia("gdotta", "Rusia le ganó a Arabia", new ArrayList<Validacion>(){{
+            add(new Validacion("gdotta", true));
+            add(new Validacion("lsuarez", false));
+            add(new Validacion("ecavani", false));
+        }});
+        Noticia noticia2 = new Noticia("mperez", "Hace frío", new ArrayList<Validacion>(){{
+            add(new Validacion("mperez", true));
+        }});
+        
+        txtObtenerNoticias.append(StringUtil.getJson(noticia1) + StringUtil.getJson(noticia2));
+        
+        
+    }//GEN-LAST:event_btnObtenerNoticiasActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        //Guarda un txt con el contenido de la textarea Noticias
+        try (PrintWriter out = new PrintWriter("Noticias.txt")) 
+        {
+            out.println(txtObtenerNoticias.getText());
+        } 
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(Noticias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,16 +299,22 @@ public class Noticias extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnObtenerNoticias;
+    private javax.swing.JButton btnReenviar;
     private javax.swing.JComboBox<String> cmbValidacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea txtAgregar;
+    private javax.swing.JTextArea txtObtenerNoticias;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
